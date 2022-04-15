@@ -1,0 +1,47 @@
+<html>
+<head>
+<style type="text/css">
+
+#game_container {
+	width: 800px;
+	height: 800px;
+	position: absolute;
+	background-color: yellow;
+}
+.tile {
+	width: 30px;
+	height: 30px;
+	position: relative;
+}
+.tile_odd {
+	background-color: rgb(205, 205, 205);
+}
+.tile_even {
+	background-color: rgb(170, 170, 170);
+}
+#scorediv {
+	position: absolute;
+	left: 20px;
+	top: 820px;
+}
+
+</style>
+<script type="text/javascript">
+	document.onkeydown = animate;
+
+	var gameContainer = document.getElementById("game_container");
+
+	// generate the game board here
+
+
+</script>
+</head>
+<body >
+	<div id="game_container">
+		<div id="box1"></div>
+	</div>
+
+	<div id="score_plus_text">Score = <div id="score_num">0</div></div>
+</body>
+	
+</html>
