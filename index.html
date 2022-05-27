@@ -10,6 +10,12 @@
 	background-color: yellow;
 }*/
 
+* {
+	padding: 0;
+	margin: 0;
+	border: 0;
+}
+
 .empty {
 	width: 50px;
 	height: 50px;
@@ -99,7 +105,7 @@ td {
 		for (let j = 0; j < 15; j++) {
 			if (j == 0)
 				htmlToAppend += `<td>${i}</td>`
-			htmlToAppend += `<td class="empty" id="cell${i}:${j}">${i}:${j}</td>`
+			htmlToAppend += `<td class="empty" id="cell${i}:${j}"></td>`
 			if (j == 14)
 				htmlToAppend += `<td>${i}</td>`
 		}
