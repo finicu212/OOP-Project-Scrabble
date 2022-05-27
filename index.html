@@ -19,7 +19,13 @@
 .empty {
 	width: 50px;
 	height: 50px;
-	background: url('img/empty.png')
+	background: url('img/empty.png');
+
+}
+
+.down {
+	background: url('img/down.png')
+	background-size: 50px 50px;		
 }
 
 .double_word {
@@ -44,6 +50,12 @@
 	width: 50px;
 	height: 50px;
 	background: url('img/triple_letter.png')
+}
+
+.center {
+	width: 50px;
+	height: 50px;
+	background: url('img/center.png')
 }
 
 #score_plus_text {
@@ -98,10 +110,50 @@ td {
 			[14, 0], [14, 7], [14, 14]
 		]
 
+		const doubleWordPositions = [
+			[1, 1], [2, 2], [3, 3], [4, 4],
+			[13, 13], [12, 12], [11, 11], [10, 10],
+			[13, 1], [12, 2], [11, 3], [10, 4],
+			[1, 13], [2, 12], [3, 11], [4, 10]
+		]
+
+		const tripleLetterPositions = [
+			[5, 5], [9, 9], [5, 9], [9, 5],
+			[1, 5], [1, 9], [13, 5], [13, 9],
+			[5, 1], [9, 1], [5, 13], [9, 13]
+		]
+
+		const doubleLetterPositions = [
+			[6, 6], [8, 6], [6, 8], [8, 8], 
+			[0, 3], [0, 11],
+			[2, 6], [2, 8], 
+			[3, 0], [3, 7], [3, 14],
+			[6, 2], [6, 12],
+			[7, 3], [7, 11],
+			[8, 2], [8, 12],
+			[11, 0], [11, 7], [11, 14],
+			[12, 6], [12, 8],
+			[14, 3], [14, 11]
+		]
+
+		const centerPositions = [[7, 7]]
+
 		const tuple = [x, y]
 
 		if (tripleWordPositions.some(a => tuple.every((v, i) => v === a[i])))
 			return "triple_word"
+
+		if (doubleWordPositions.some(a => tuple.every((v, i) => v === a[i])))
+			return "double_word"
+
+		if (tripleLetterPositions.some(a => tuple.every((v, i) => v === a[i])))
+			return "triple_letter"
+
+		if (doubleLetterPositions.some(a => tuple.every((v, i) => v === a[i])))
+			return "double_letter"
+
+		if (centerPositions.some(a => tuple.every((v, i) => v === a[i])))
+			return "center"
 
 		return "empty"
 	}
