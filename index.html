@@ -67,7 +67,7 @@ td {
 
 </script>
 </head>
-<body >
+<body>
 	<div id="container">
 		<div id="game_container">
 			<table id="game_container_table">
@@ -76,6 +76,7 @@ td {
 	</div>
 
 	<div id="score_plus_text">Score = <span id="score_num">0</span></div>
+
 
 <!-- Board generation -->
 <script> 
@@ -88,6 +89,21 @@ td {
 
 	function indicesToCellStr(x, y) {
 		return `cell${x}:${y}`
+	}
+
+	function getClassOfCellByIndices(x, y) {
+		const tripleWordPositions = [
+			[0, 0], [0, 7], [0, 14],
+			[7, 0], [7, 14],
+			[14, 0], [14, 7], [14, 14]
+		]
+
+		const tuple = [x, y]
+
+		if (tripleWordPositions.some(a => tuple.every((v, i) => v === a[i])))
+			return "triple_word"
+
+		return "empty"
 	}
 
 	// Add ABCD... as headers
@@ -105,7 +121,11 @@ td {
 		for (let j = 0; j < 15; j++) {
 			if (j == 0)
 				htmlToAppend += `<td>${i}</td>`
-			htmlToAppend += `<td class="empty" id="cell${i}:${j}"></td>`
+
+			let classOfCell = getClassOfCellByIndices(i, j)
+
+			htmlToAppend += `<td class="${classOfCell}" id="cell${i}:${j}"></td>`
+
 			if (j == 14)
 				htmlToAppend += `<td>${i}</td>`
 		}
@@ -123,13 +143,6 @@ td {
 	console.log("Table code: \n", htmlToAppend)
 
 	$("#game_container_table").append(htmlToAppend);
-
-	const triple_word_indices = [[0, 0], [0, 1]];
-	triple_word_indices.forEach(pair => {
-		let cellStr = indicesToCellStr(pair[0], pair[1]);
-		$("#" + cellStr).addClass("triple_word")
-	});
-
 </script>
 
 </body>
