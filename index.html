@@ -1,13 +1,14 @@
 <html>
 <head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <style type="text/css">
 
-#game_container {
+/*#game_container {
 	width: 800px;
 	height: 800px;
 	position: absolute;
 	background-color: yellow;
-}
+}*/
 .tile {
 	width: 30px;
 	height: 30px;
@@ -27,21 +28,63 @@
 
 </style>
 <script type="text/javascript">
-	document.onkeydown = animate;
+	// document.onkeydown = animate;
 
 	var gameContainer = document.getElementById("game_container");
 
 	// generate the game board here
 
-
 </script>
 </head>
 <body >
-	<div id="game_container">
-		<div id="box1"></div>
+	<div id="container">
+		<div id="game_container">
+			<table id="game_container_table">
+			</table>
+		</div>
 	</div>
 
-	<div id="score_plus_text">Score = <div id="score_num">0</div></div>
+	<div id="score_plus_text">Score = <span id="score_num">0</span></div>
+
+<!-- Board generation -->
+<script> 
+	function intToChar(int) {
+		const code = 'A'.charCodeAt(0);
+		console.log(code);
+
+		return String.fromCharCode(code + int);
+	}
+
+	// Add ABCD... as headers
+	let htmlToAppend = "<tr>"
+	for (let i = 0; i < 15; i++) {
+		htmlToAppend += `<th>${intToChar(i)}</th>`
+	}
+	htmlToAppend += "</tr>"
+
+
+	// inner cells
+	for (let i = 0; i < 15; i++) {
+		htmlToAppend += "<tr>"
+		for (let j = 0; j < 15; j++) {
+			htmlToAppend += `<td id="cell${(i * 15) + j}"></td>`
+		}
+		htmlToAppend += "</tr>"
+	}
+
+	// Add ABCD... as headers
+	htmlToAppend += "<tr>"
+	for (let i = 0; i < 15; i++) {
+		htmlToAppend += `<th>${intToChar(i)}</th>`
+	}
+	htmlToAppend += "</tr>"
+
+	console.log("Table code: \n", htmlToAppend)
+
+	$("#game_container_table").append(htmlToAppend);
+
+</script>
+
 </body>
 	
 </html>
