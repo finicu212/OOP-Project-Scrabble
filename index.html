@@ -24,7 +24,9 @@
 }
 
 .down {
-	background: url('img/down.png')
+	width: 50px;
+	height: 50px;
+	background: url('img/down-small.png')
 	background-size: 50px 50px;		
 }
 
@@ -172,14 +174,14 @@ td {
 		htmlToAppend += "<tr>"
 		for (let j = 0; j < 15; j++) {
 			if (j == 0)
-				htmlToAppend += `<td>${i}</td>`
+				htmlToAppend += `<th>${i}</th>`
 
 			let classOfCell = getClassOfCellByIndices(i, j)
 
 			htmlToAppend += `<td class="${classOfCell}" id="cell${i}:${j}"></td>`
 
 			if (j == 14)
-				htmlToAppend += `<td>${i}</td>`
+				htmlToAppend += `<th>${i}</th>`
 		}
 		htmlToAppend += "</tr>"
 	}
@@ -195,6 +197,16 @@ td {
 	console.log("Table code: \n", htmlToAppend)
 
 	$("#game_container_table").append(htmlToAppend);
+
+	$("td").click(function() {
+		var currentArrow = $(this).text();
+		console.log(currentArrow)
+		$("td").html("");
+		if (currentArrow == "↓")
+			$(this).html("→");
+		else
+			$(this).html("↓");
+	});
 </script>
 
 </body>
