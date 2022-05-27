@@ -9,21 +9,46 @@
 	position: absolute;
 	background-color: yellow;
 }*/
-.tile {
-	width: 30px;
-	height: 30px;
-	position: relative;
+
+.empty {
+	width: 50px;
+	height: 50px;
+	background: url('img/empty.png')
 }
-.tile_odd {
-	background-color: rgb(205, 205, 205);
+
+.double_word {
+	width: 50px;
+	height: 50px;
+	background: url('img/double_word.png')
 }
-.tile_even {
-	background-color: rgb(170, 170, 170);
+
+.triple_word {
+	width: 50px;
+	height: 50px;
+	background: url('img/triple_word.png')
 }
-#scorediv {
+
+.double_letter {
+	width: 50px;
+	height: 50px;
+	background: url('img/double_letter.png')
+}
+
+.triple_letter {
+	width: 50px;
+	height: 50px;
+	background: url('img/triple_letter.png')
+}
+
+#score_plus_text {
 	position: absolute;
 	left: 20px;
 	top: 820px;
+}
+
+td {
+  text-align: center;
+  vertical-align: middle;
 }
 
 </style>
@@ -55,8 +80,13 @@
 		return String.fromCharCode(code + int);
 	}
 
+	function indicesToCellStr(x, y) {
+		return `cell${x}:${y}`
+	}
+
 	// Add ABCD... as headers
 	let htmlToAppend = "<tr>"
+	htmlToAppend += `<th></th>` // Empty first header cell for row num cell (lateral numbering)
 	for (let i = 0; i < 15; i++) {
 		htmlToAppend += `<th>${intToChar(i)}</th>`
 	}
@@ -67,13 +97,18 @@
 	for (let i = 0; i < 15; i++) {
 		htmlToAppend += "<tr>"
 		for (let j = 0; j < 15; j++) {
-			htmlToAppend += `<td id="cell${(i * 15) + j}"></td>`
+			if (j == 0)
+				htmlToAppend += `<td>${i}</td>`
+			htmlToAppend += `<td class="empty" id="cell${i}:${j}">${i}:${j}</td>`
+			if (j == 14)
+				htmlToAppend += `<td>${i}</td>`
 		}
 		htmlToAppend += "</tr>"
 	}
 
 	// Add ABCD... as headers
 	htmlToAppend += "<tr>"
+	htmlToAppend += `<th></th>` // Empty first header cell for row num cell (lateral numbering)
 	for (let i = 0; i < 15; i++) {
 		htmlToAppend += `<th>${intToChar(i)}</th>`
 	}
@@ -82,6 +117,12 @@
 	console.log("Table code: \n", htmlToAppend)
 
 	$("#game_container_table").append(htmlToAppend);
+
+	const triple_word_indices = [[0, 0], [0, 1]];
+	triple_word_indices.forEach(pair => {
+		let cellStr = indicesToCellStr(pair[0], pair[1]);
+		$("#" + cellStr).addClass("triple_word")
+	});
 
 </script>
 
